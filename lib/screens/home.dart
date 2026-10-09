@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../widgets/products_categories.dart';
+import 'categories.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,40 +13,47 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   catergoriesScroll(size, String img, String name){
-    return Stack(
-
-      children: [
-        Container(
-          margin: EdgeInsets.only(left: 4, right: 4),
-          width: size.width/1.5,
-          height: size.height/4,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              img,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 15,
-          left: 20,
-          child: Text(
-            name,
-            style: const TextStyle(
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => Category(heading: name))
+        );
+      },
+      child: Stack(
+      
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 4, right: 4),
+            width: size.width/1.5,
+            height: size.height/4,
+            decoration: BoxDecoration(
               color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+              borderRadius: BorderRadius.circular(10),
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                img,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-        ),
-    ]
+          Positioned(
+            bottom: 15,
+            left: 20,
+            child: Text(
+              name,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+      ]
+      ),
     );
   }
 
@@ -156,7 +164,6 @@ class _HomeState extends State<Home> {
                   ProductCard(name: "Aquemini", image: "assets/images/products/aquemini.jpg", price: '\$11.99', isFavorite: true, isSale: false,),
                   ProductCard(name: "Purple Rain", image: "assets/images/products/purple.jpg", price: '\$8.99', isFavorite: true, isSale: true,),
                   ProductCard(name: "Thriller", image: "assets/images/products/thirller.jpg", price: '\$19.99', isFavorite: true, isSale: false,),
-
 
                 ],
               )
